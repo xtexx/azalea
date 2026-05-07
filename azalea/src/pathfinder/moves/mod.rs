@@ -18,7 +18,7 @@ use azalea_registry::builtin::BlockKind;
 use azalea_world::World;
 use bevy_ecs::{entity::Entity, message::MessageWriter, system::Commands, world::EntityWorldMut};
 use parking_lot::RwLock;
-use tracing::debug;
+use tracing::trace;
 
 use super::{
     astar,
@@ -170,7 +170,7 @@ impl ExecuteCtx<'_, '_, '_, '_, '_, '_, '_, '_> {
         }
 
         let best_tool_result = best_tool_in_hotbar_for_block(block_state, &self.menu);
-        debug!("best tool for {block_state:?}: {best_tool_result:?}");
+        trace!("best tool for {block_state:?}: {best_tool_result:?}");
 
         self.commands.trigger(SetSelectedHotbarSlotEvent {
             entity: self.entity,
