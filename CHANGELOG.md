@@ -22,6 +22,7 @@ is breaking anyways, semantic versioning is not followed.
 ### Fixed
 
 - Incorrect `damage_kind` component protocol implementation.
+- The `AirSupply` metadata component was defaulting to `0` instead of `300`. (@wbbradley)
 
 ## [0.16.0+mc26.1] - 2026-03-27
 
