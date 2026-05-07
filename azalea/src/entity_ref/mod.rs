@@ -151,7 +151,8 @@ impl EntityRef {
 
     /// Look at this entity from the client that created the `EntityRef`.
     pub fn look_at(&self) -> AzaleaResult<()> {
-        Ok(self.client.look_at(self.eye_position()?))
+        self.client.look_at(self.eye_position()?);
+        Ok(())
     }
 
     /// Returns the distance between the client's feet position and this

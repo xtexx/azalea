@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 use std::{
     cmp::Ordering,
     collections::{HashMap, HashSet},

@@ -201,12 +201,9 @@ impl ChatFormatting {
     }
 
     pub fn from_name(name: &str) -> Option<&'static Self> {
-        for formatter in &Self::FORMATTERS {
-            if formatter.name() == name {
-                return Some(formatter);
-            }
-        }
-        None
+        Self::FORMATTERS
+            .iter()
+            .find(|&formatter| formatter.name() == name)
     }
 
     pub fn code(&self) -> char {

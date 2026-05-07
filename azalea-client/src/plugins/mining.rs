@@ -326,7 +326,9 @@ pub fn handle_mining_queued(
                 .unwrap_or_default();
 
             // we can't break blocks if they don't have a bounding box
-            let block_is_solid = !target_block_state.outline_shape().is_empty();
+            let block_is_solid = !target_block_state
+                .outline_shape(mining_queued.position)
+                .is_empty();
 
             if block_is_solid && **mine_progress == 0. {
                 // interact with the block (like note block left click) here

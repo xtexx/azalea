@@ -3,6 +3,7 @@ mod discrete_voxel_shape;
 pub mod entity_collisions;
 mod mergers;
 mod shape;
+mod shape_offset;
 pub mod world_collisions;
 
 use std::{ops::Add, sync::LazyLock};
@@ -498,7 +499,7 @@ pub fn legacy_calculate_solid(block: BlockState) -> bool {
         return solid;
     }
 
-    let shape = block.collision_shape();
+    let shape = block.base_collision_shape();
     if shape.is_empty() {
         return false;
     }

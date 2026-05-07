@@ -157,7 +157,7 @@ impl From<DirectionStates> for WalkDirection {
         } else if left {
             return Self::Left;
         }
-        return Self::None;
+        Self::None
     }
 }
 
