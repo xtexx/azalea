@@ -17,7 +17,7 @@ use azalea_core::{
     codec_utils::*,
     filterable::Filterable,
     position::GlobalPos,
-    registry_holder::{RegistryHolder, dimension_type::DamageTypeElement},
+    registry_holder::RegistryHolder,
     sound::CustomSound,
 };
 use azalea_registry::{
@@ -1664,17 +1664,19 @@ pub struct ProvidesTrimMaterial {
 
 #[derive(AzBuf, Clone, Debug, PartialEq, Serialize)]
 pub struct DirectTrimMaterial {
+    #[serde(flatten)]
     pub assets: MaterialAssetGroup,
     pub description: FormattedText,
 }
 #[derive(AzBuf, Clone, Debug, PartialEq, Serialize)]
 pub struct MaterialAssetGroup {
-    pub base: AssetInfo,
+    pub assert_name: AssetInfo,
     #[serde(skip_serializing_if = "is_default")]
-    pub overrides: Vec<(Identifier, AssetInfo)>,
+    pub override_armor_assets: Vec<(Identifier, AssetInfo)>,
 }
 
 #[derive(AzBuf, Clone, Debug, PartialEq, Serialize)]
+#[serde(transparent)]
 pub struct AssetInfo {
     pub suffix: String,
 }
@@ -1745,7 +1747,7 @@ pub struct MinimumAttackCharge {
 #[derive(AzBuf, Clone, Debug, PartialEq, Serialize)]
 #[serde(transparent)]
 pub struct DamageType {
-    pub value: Holder<azalea_registry::data::DamageKind, DamageTypeElement>,
+    pub value: azalea_registry::data::DamageKind,
 }
 
 #[derive(AzBuf, Clone, Debug, PartialEq, Serialize)]

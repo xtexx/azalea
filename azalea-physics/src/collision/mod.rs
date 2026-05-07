@@ -29,7 +29,8 @@ use tracing::warn;
 
 use self::world_collisions::get_block_collisions;
 use crate::{
-    client_movement::ClientMovementState, collision::entity_collisions::AabbQuery, travel::no_collision,
+    client_movement::ClientMovementState, collision::entity_collisions::AabbQuery,
+    travel::no_collision,
 };
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]

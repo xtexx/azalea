@@ -20,6 +20,8 @@ is breaking anyways, semantic versioning is not followed.
 
 ### Fixed
 
+- Incorrect `damage_kind` component protocol implementation.
+
 ## [0.16.0+mc26.1] - 2026-03-27
 
 ### Added

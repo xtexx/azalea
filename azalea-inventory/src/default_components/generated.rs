@@ -5479,27 +5479,13 @@ impl DefaultableComponent for AttackRange {
 impl DefaultableComponent for DamageType {
     fn default_for_item(item: ItemKind) -> Option<Self> {
         let value = match item {
-            ItemKind::CopperSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
-            ItemKind::DiamondSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
-            ItemKind::GoldenSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
-            ItemKind::IronSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
-            ItemKind::NetheriteSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
-            ItemKind::StoneSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
-            ItemKind::WoodenSpear => {
-                azalea_registry::Holder::Reference(azalea_registry::data::DamageKind::new_raw(0))
-            }
+            ItemKind::CopperSpear => azalea_registry::data::DamageKind::new_raw(0),
+            ItemKind::DiamondSpear => azalea_registry::data::DamageKind::new_raw(0),
+            ItemKind::GoldenSpear => azalea_registry::data::DamageKind::new_raw(0),
+            ItemKind::IronSpear => azalea_registry::data::DamageKind::new_raw(0),
+            ItemKind::NetheriteSpear => azalea_registry::data::DamageKind::new_raw(0),
+            ItemKind::StoneSpear => azalea_registry::data::DamageKind::new_raw(0),
+            ItemKind::WoodenSpear => azalea_registry::data::DamageKind::new_raw(0),
             _ => return None,
         };
         Some(DamageType { value: value })

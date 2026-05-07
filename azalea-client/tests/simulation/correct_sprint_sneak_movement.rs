@@ -1,4 +1,6 @@
-use azalea_client::{ClientMovementState, SprintDirection, StartSprintEvent, test_utils::prelude::*};
+use azalea_client::{
+    ClientMovementState, SprintDirection, StartSprintEvent, test_utils::prelude::*,
+};
 use azalea_core::position::{BlockPos, ChunkPos, Vec3};
 use azalea_entity::LookDirection;
 use azalea_protocol::{
