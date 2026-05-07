@@ -37,14 +37,14 @@ impl Client {
     ///
     /// ```
     /// # use azalea::{prelude::*, registry::builtin::BlockKind};
-    /// # async fn example(mut bot: azalea::Client) -> AzaleaResult<()> {
+    /// # async fn example(mut bot: azalea::Client) -> azalea::error::AzaleaResult<()> {
     /// let target_pos = bot
-    ///     .world()
+    ///     .world()?
     ///     .read()
-    ///     .find_block(bot.position(), &BlockKind::Chest.into());
+    ///     .find_block(bot.position()?, &BlockKind::Chest.into());
     /// let Some(target_pos) = target_pos else {
     ///     bot.chat("no chest found");
-    ///     return;
+    ///     return Ok(());
     /// };
     /// let container = bot.open_container_at(target_pos).await?;
     /// # Ok(())
@@ -256,11 +256,12 @@ impl ContainerHandleRef {
     ///
     /// ```no_run
     /// # use azalea::prelude::*;
-    /// # fn example(bot: &Client) {
-    /// let inventory = bot.get_inventory();
+    /// # fn example(bot: &Client) -> azalea::error::AzaleaResult<()> {
+    /// let inventory = bot.get_inventory()?;
     /// let inventory_title = inventory.title().unwrap_or_default().to_string();
     /// // would be true if an unnamed chest is open
     /// assert_eq!(inventory_title, "Chest");
+    /// # Ok(())
     /// # }
     /// ```
     pub fn title(&self) -> Option<FormattedText> {

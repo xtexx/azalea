@@ -11,7 +11,8 @@ use parking_lot::Mutex;
 
 use crate::State;
 
-pub type Ctx = CommandContext<Mutex<CommandSource>>;
+pub type Ctx = CommandContext<Mutex<CommandSource>, eyre::Result<i32>>;
+pub type Dispatcher = CommandDispatcher<Mutex<CommandSource>, eyre::Result<i32>>;
 
 pub struct CommandSource {
     pub bot: Client,
@@ -42,7 +43,7 @@ impl CommandSource {
     }
 }
 
-pub fn register_commands(commands: &mut CommandDispatcher<Mutex<CommandSource>>) {
+pub fn register_commands(commands: &mut Dispatcher) {
     combat::register(commands);
     debug::register(commands);
     movement::register(commands);

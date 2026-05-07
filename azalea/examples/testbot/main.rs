@@ -126,7 +126,7 @@ impl State {
 #[derive(Clone, Default, Resource)]
 struct SwarmState {
     pub args: Arc<Args>,
-    pub commands: Arc<CommandDispatcher<Mutex<CommandSource>>>,
+    pub commands: Arc<commands::Dispatcher>,
 }
 
 async fn handle(bot: Client, event: azalea::Event, state: State) -> eyre::Result<()> {
@@ -137,7 +137,7 @@ async fn handle(bot: Client, event: azalea::Event, state: State) -> eyre::Result
             bot.set_client_information(ClientInformation {
                 view_distance: 32,
                 ..Default::default()
-            });
+            })?;
             if swarm.args.pathfinder_debug_particles {
                 bot.ecs
                     .write()
@@ -169,7 +169,16 @@ async fn handle(bot: Client, event: azalea::Event, state: State) -> eyre::Result
                         state: state.clone(),
                     }),
                 ) {
-                    Ok(_) => {}
+                    Ok(Ok(_)) => {}
+                    Ok(Err(err)) => {
+                        eprintln!("azalea error: {err:?}");
+                        let command_source = CommandSource {
+                            bot,
+                            chat: chat.clone(),
+                            state: state.clone(),
+                        };
+                        command_source.reply(format!("azalea error: {err:?}"));
+                    }
                     Err(err) => {
                         eprintln!("{err:?}");
                         let command_source = CommandSource {
@@ -200,7 +209,7 @@ async fn handle(bot: Client, event: azalea::Event, state: State) -> eyre::Result
                                 .max_timeout(Duration::from_secs(1)),
                         );
                     } else {
-                        following.look_at();
+                        following.look_at()?;
                     }
                 }
             }

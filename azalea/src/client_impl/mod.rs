@@ -355,9 +355,10 @@ impl Client {
     ///
     /// ```
     /// # use azalea_core::position::ChunkPos;
-    /// # fn example(client: &azalea::Client) {
-    /// let world = client.partial_world();
+    /// # fn example(client: &azalea::Client) -> azalea::error::AzaleaResult<()> {
+    /// let world = client.partial_world()?;
     /// let is_0_0_loaded = world.read().chunks.limited_get(&ChunkPos::new(0, 0)).is_some();
+    /// # Ok(())
     /// # }
     pub fn partial_world(&self) -> AzaleaResult<Arc<RwLock<PartialWorld>>> {
         let world_holder = self.component::<WorldHolder>()?;

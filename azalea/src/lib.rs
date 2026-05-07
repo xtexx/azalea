@@ -66,10 +66,15 @@ use futures::future::BoxFuture;
 pub use join_opts::JoinOpts;
 
 pub use crate::{
-    client_impl::{Client, StartClientOpts},
+    client_impl::{Client, StartClientOpts, error},
     entity_ref::EntityRef,
     events::Event,
 };
+
+// for convenience, adds the alias `azalea::Result` instead of
+// `azalea::error::AzaleaResult`. the user should probably be using anyhow/eyre,
+// but in some cases they may prefer to have the errors more strictly defined.
+pub type Result<T> = error::AzaleaResult<T>;
 
 pub type BoxHandleFn<S, R> = Box<dyn Fn(Client, Event, S) -> BoxFuture<'static, R> + Send>;
 pub type HandleFn<S, Fut> = fn(Client, Event, S) -> Fut;
